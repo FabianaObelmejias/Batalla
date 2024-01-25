@@ -1,0 +1,48 @@
+import random
+
+#Ataques (usando listas)
+ataques_jugador = ["malicioso", "placaje", "ascuas"]
+ataques_oponente = ["latigo", "placaje", "ascuas"]
+
+#Variables de batalla
+PS_jugador = 100 #PS=Puntos de Salud del jugador
+PS_oponente = 100 #PS=Puntos de Salud del oponente
+defensa_oponente = 100
+defensa_jugador = 100
+
+#Batalla
+while PS_jugador > 0 and PS_oponente > 0:
+    ataque_jugador = None
+    
+#Se le pide al usuario un tipo de ataque (de los mencionadoes en "#Ataques")
+    while ataque_jugador not in ataques_jugador:
+        ataque_jugador = input("¿Ataque? ")
+
+    #ataque del jugador
+    if ataque_jugador == "malicioso":
+        defensa_oponente -= 10
+    elif ataque_jugador == "placaje":
+        PS_oponente -= 35 * defensa_oponente / 100
+    elif ataque_jugador == "ascuas":
+        PS_oponente -= 20
+
+    #Mensajes para ataques no aprobados
+    else:
+        print("¡¿Qué estás haciendo?! Tus ataques son malicioso, placaje y ascuas")
+
+    #Ataque de oponente post-ataque de jugador
+    ataque_oponente = random.choice(ataques_oponente)
+    if ataque_oponente == "latigo":
+        defensa_jugador -= 10
+    elif ataque_oponente == "placaje":
+        PS_jugador -= 35 * defensa_jugador / 100
+    elif ataque_oponente == "ascuas":
+        PS_jugador -= 40
+
+#La batalla ha terminado
+if PS_oponente <= 0 and PS_jugador <= 0:
+    print("Empate")
+elif PS_oponente <= 0:
+    print("Felicidades, has ganado")
+else:
+    print("Lo siento, has perdido")
